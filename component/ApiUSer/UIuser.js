@@ -1,0 +1,72 @@
+import { StyleSheet, Text, TextInput, View,Button } from 'react-native'
+import React, { useState } from 'react'
+
+
+const UIuser = () => {
+    const [fullname,setfullname]=useState("");
+    const [email,setemail]=useState("");
+    const [address,setaddress]=useState("");
+
+    const [valid,setvalid]=useState(true)
+    const SendData=async()=>{
+    
+     if(fullname&&email&&address){
+      
+       setvalid(true)
+         try {
+             const response = await fetch('http://192.168.1.73:7070/list/post',{
+             method:"POST",
+             headers:{
+             "content-Type":"application/json"
+             },
+             body:JSON.stringify({fullname,email,address})
+         });
+         const res=response.json();
+         console.log(res);
+
+          } catch (error) {
+             console.log(error);
+
+          }
+        
+      
+     }else{
+      setvalid(false)
+     }  
+        
+    }
+  return (
+    <View>
+      <View style={styles.main}>
+      <Text> this is user List</Text>
+     {
+        valid? <View><TextInput style={styles.text} placeholder='enter name' onChangeText={(text)=>{setfullname(text)}}></TextInput>
+        <TextInput style={styles.text} placeholder='enter email' onChangeText={(text)=>{setemail(text)}}></TextInput>
+        <TextInput style={styles.text} placeholder='enter address' onChangeText={(text)=>setaddress(text)}></TextInput></View>:
+        <View>
+        <TextInput style={styles.text} placeholder='enter name' onChangeText={(text)=>{setfullname(text)}}></TextInput>
+        <TextInput style={styles.text} placeholder='enter email' onChangeText={(text)=>{setemail(text)}}></TextInput>
+        <TextInput style={styles.text} placeholder='enter address' onChangeText={(text)=>setaddress(text)}></TextInput>
+        <Text> Please enter all required filled</Text>
+        </View>
+     }
+          <Button title='Send Data' onPress={()=>{
+            SendData()
+             }}></Button>
+      </View>
+    </View>
+  )
+}
+
+export default UIuser
+
+const styles = StyleSheet.create({
+   text:{
+     color:"green",
+     backgroundColor:"lightgray",
+     gap:20,
+     margin:10,
+     padding:10,
+
+   }
+})

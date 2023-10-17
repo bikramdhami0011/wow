@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">wow</string>
+  <string name="MY_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAv5qZjl3RChSPewEzs5qPq_kftKkzGkPI</string>
 </resources>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "679685449989",
+    "project_id": "reactnative-54b55",
+    "storage_bucket": "reactnative-54b55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679685449989:android:46dbae99f803bcdd822f6c",
+        "android_client_info": {
+          "package_name": "com.wow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlBAtp-N_fW498L40s5HYMZC-GHOGAbn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

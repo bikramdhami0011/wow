@@ -78,22 +78,72 @@
 
 // export default Reanimation
 
+// const styles = StyleSheet.create({
+//   container:{
+//     flex:1,
+//     backgroundColor:"lightgray",
+//    justifyContent:"center",
+   
+//   },
+//   input:{
+//     margin:0,
+//     height:60,
+//     width:"100%",
+//     elevation:2,
+//     justifyContent:"center",
+//     alignItems:"center",
+//     alignContent:"center",
+//     color:"blue"
+   
+//   }
+// })
+// phone no verified half working is done
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import React, { useState } from 'react'
+import Auth from "@react-native-firebase/auth"
+const ImageStore = () => {
+    const [number,setnumber]=useState("");
+    const [otp,setotp]=useState("");
+    const [conform,setconform]=useState("");
+    const SendForVerify=async()=>{
+      const mgnum=+977 +number
+    const senNum=await Auth().signInWithPhoneNumber(mgnum)
+    console.log(senNum);
+    }
+  return (
+    <View style={styles.container}>
+      <Text >Verify Phone NO</Text>
+      <View style={styles.box}>
+      <TextInput style={{borderWidth:1,borderColor:"blue"}} placeholder='enter phone no' value={number} onChangeText={(text)=>{
+       setnumber(text)
+      }}></TextInput>
+      <Button title='Send Phone No.' onPress={()=>{SendForVerify()}}></Button>
+      </View>
+      <View style={styles.box}>
+      <TextInput style={{borderWidth:1,borderColor:"blue"}} placeholder='enter phone no' value={otp} onChangeText={(text)=>{
+        setotp(text)
+       }}></TextInput>
+      <Button title='Send OTP ' onPress={()=>{SendForVerify()}}></Button>
+      </View>
+      
+    </View>
+  )
+}
+
+export default ImageStore
+
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    backgroundColor:"lightgray",
-   justifyContent:"center",
-   
-  },
-  input:{
-    margin:0,
-    height:60,
-    width:"100%",
-    elevation:2,
-    justifyContent:"center",
-    alignItems:"center",
-    alignContent:"center",
-    color:"blue"
-   
-  }
+    container:{
+     justifyContent:"center",
+     alignItems:"center",
+     margin:10, padding:10,
+      gap:10
+    },
+    box:{
+       borderWidth:0.5,
+       gap:4,
+       width:"90%",
+       borderRadius:10,
+       borderColor:"blue"
+    }
 })

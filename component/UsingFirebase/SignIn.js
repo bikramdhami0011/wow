@@ -1,25 +1,30 @@
 import { Alert, Button, StyleSheet, Text, TextInput, View,TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
+import firestore from "@react-native-firebase/firestore"
 import { initializeApp } from "firebase/app";
 import Auth from "@react-native-firebase/auth"
-import Animated, {useAnimatedStyle, useSharedValue, withSpring} from 'react-native-reanimated';
+import Animated, {useAnimatedStyle, useSharedValue, withDelay, withSpring} from 'react-native-reanimated';
 const SignIn = (props) => {
+  const [name,setname]=useState(null);
     const ButtonComp=Animated.createAnimatedComponent(TouchableOpacity)
     const scale=useSharedValue(1);
     const AnimatedStyle=useAnimatedStyle(()=>{
       return {
-          transform:[{translateX:scale.value}]
+          transform:[{scale:scale.value}]
       }
     })
   const [email,setemail]=useState(null);
   const [password,setpassword]=useState(null);
   const UserSignIn=async()=>{
-    
+   
     if(email && password){
       try {
         const userAuth=await Auth().createUserWithEmailAndPassword(email,password);
-          const userVerify=await Auth().currentUser.sendEmailVerification();
 
+          const userVerify=await Auth().currentUser.sendEmailVerification();
+          const fstore =await firestore().collection("users").doc(userAuth.user.uid).set({name:name,email:email,id:userAuth.user.uid})
+          console.log(fstore);
+          
         if(!userVerify){
            
             Alert.alert("Please check the email inbox ...")
@@ -37,12 +42,16 @@ const SignIn = (props) => {
     <Animated.View style={[styles.container,AnimatedStyle]}>
     <View>
     <Text>The use is sign in from using email and password</Text>
+    <TextInput style={styles.input} placeholder='enter name' onChangeText={(text)=>{
+      setname(text);
+    }}></TextInput>
     <TextInput style={styles.input} placeholder='enter email' onChangeText={(text)=>{
       setemail(text);
     }}></TextInput>
     <TextInput style={styles.input} placeholder='enter password' onChangeText={(text)=>{
       setpassword(text);
     }}></TextInput>
+
     
     <Button title='sign in' onPress={()=>{
       UserSignIn()
@@ -51,9 +60,10 @@ const SignIn = (props) => {
      <View style={styles.input}>
      <Text>If you are Registed ? </Text>
      <ButtonComp onPress={()=>{
+      scale.value=withDelay(200,withSpring(0,undefined,(finish)=>{
+        scale.value=withSpring(1)})) 
         props.navigation.navigate("login")
-        scale.value=withSpring(100,undefined,(finish)=>{
-            scale.value=withSpring(0)})
+        
      }}>
        <Text style={{color:"blue",fontSize:20,fontWeight:500}}> LogIn</Text>
      </ButtonComp>

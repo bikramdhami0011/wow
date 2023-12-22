@@ -1,30 +1,34 @@
+<!-- #region -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        div:nth-child(1){
-            background-color: red;
-            border: 2px solid black;
-            height: 100px;
-            width: 100px;
-            outline: 20px green;
-            outline-offset: 10px;
-            outline-width: thick;
-            outline-color: blue;
-            box-shadow: 5px 5px 2px;
-        }
-    </style>
 </head>
-
+<style>
+    .container{
+        height: 400px;
+        width: 500px;
+        /* background-image: url("https://images.unsplash.com/photo-1686102576420-21c7624cf146?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        background-repeat: no-repeat; */
+        /* background-color:gray; */
+        background-position:center center;
+        background-clip: border-box;
+        
+    }
+    img{
+        width: 400px;
+        height: 400px;
+         object-fit: cover;
+         object-position: 50% 50%;
+         
+        background-color: aqua;
+    }
+</style>
 <body>
-    <div class="cont">this is div</div>
-    <div class="cont">this is div</div>
-    <div class="cont">this is div</div>
+    <div class="container">
+       <img src="https://images.unsplash.com/photo-1686102576420-21c7624cf146?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" srcset="">
+    </div>
 </body>
-<script>
-    navigator.serviceWorker.register("<h1>hello ibkram </h1>")
-</script>
 </html>

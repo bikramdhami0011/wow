@@ -6,6 +6,10 @@ export const Slice =createSlice({
     name:"AddCard",
     initialState,
     reducers:{
+   SetData:(state,action)=>{
+     const data=action.payload;
+     state.UserAddCard.push(data);
+    },
            Add_To_Card:(state,action)=>{
                     const actulalitem=action.payload 
                state.UserAddCard.push(actulalitem);
@@ -18,7 +22,8 @@ export const Slice =createSlice({
             })
             state.UserAddCard=ExpData;
 
-        }
+        },
+       
     }
 })
 export const {Add_To_Card,Remove_To_Card}=Slice.actions;
